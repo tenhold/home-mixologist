@@ -1,11 +1,17 @@
+require('dotenv').config();
 const express = require('express');
+const mongoose = require('mongoose');
 
 const app = express();
+const { PORT } = process.env;
 
-const PORT = 8080;
+const { Schema } = mongoose;
+
+mongoose.connect('mongodb://localhost/mixologist', {useNewUrlParser: true});
+
 
 app.get('/', (req, res) => {
-  res.send('Does this Work?');
+  res.send('Hello?');
 })
 
 app.listen(PORT, () => {
