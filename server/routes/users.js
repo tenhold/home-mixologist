@@ -21,9 +21,9 @@ const userSchema = new Schema({
 const User = mongoose.model('User', userSchema);
 
 
-router.route('/').get((req, res) => {
-  console.log('GET REQUEST')
-});
+// router.route('/').get((req, res) => {
+//   console.log('GET REQUEST')
+// });
 
 router.route('/add').post((req, res) => {
   console.log(req)

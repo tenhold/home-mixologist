@@ -1,4 +1,4 @@
-// console.log('hello from hell');
+console.log('hello from hell');
 
 // import _ from 'lodash';
 
