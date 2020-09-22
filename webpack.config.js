@@ -1,4 +1,5 @@
 const path = require('path');
+// const webpack = require('webpack');
 
 module.exports = {
   entry: './client/src/index.jsx',
@@ -9,11 +10,15 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.jsx$/,
+        test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        use: ['babel-loader'],
+        use: 'babel-loader',
       }
     ]
+  },
+  externals: {
+    'react': 'React',
+    'react-dom': 'ReactDOM'
   },
   watch: true
 } 

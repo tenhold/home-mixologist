@@ -26,7 +26,7 @@ router.route('/').get((req, res) => {
 });
 
 router.route('/add').post((req, res) => {
-  console.log('hello')
+  console.log(req)
   res.send('hello');
   res.end();
   // const { username } = req.body;
