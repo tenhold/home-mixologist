@@ -1,3 +1,4 @@
+const { concat } = require('lodash');
 const mongoose = require('mongoose');
 const router = require('express').Router();
 const { Schema } = mongoose;
@@ -11,36 +12,41 @@ const { Schema } = mongoose;
  */
 
 
-
-
-
+// user schema
 const userSchema = new Schema({
-  username: String
+  username: {
+    type: String,
+    required: true,
+    unique: true,
+    trim: true
+  }
 });
 
+// user model
 const User = mongoose.model('User', userSchema);
 
-
-// router.route('/').get((req, res) => {
-//   console.log('GET REQUEST')
-// });
-
-router.route('/add').post((req, res) => {
-  console.log(req)
-  res.send('hello');
-  res.end();
-  // const { username } = req.body;
-  // console.log(username);
-
-  // const newUser = new User({ username })
-
-  // newUser.save()
-  //   .then(() => {
-  //     console.log(username)
-  //     res.sendStatus(201);
-  //   })
+router.route('/').get((req, res) => {
+  User.find()
+    .then((users) => {
+      res.json(users);
+      res.end();
+    })
+    .catch(err => res.sendStatus(404));
 });
 
+router.route('/add').post(async(req, res) => {
+  const { username } = req.body;
+  console.log(req.body);
+  
+  const newUser = new User({ username })
+
+  await newUser.save()
+  try {
+    res.json('user added!')
+  } catch(err) {
+    res.sendStatus(404);
+  }
+})
 
 module.exports = {
   User,
